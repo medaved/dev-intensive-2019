@@ -19,28 +19,20 @@ abstract class BaseMessage (
             return when(type) {
                 "image" -> ImageMessage(
                     "$lastId",
-                    from,
-                    chat,
-                    isIncoming,
-                    date,
+                    from = from,
+                    chat = chat,
+                    isIncoming = isIncoming,
+                    date = date,
                     image = payload as String
                 )
-                "text" -> TextMessage(
+                else -> TextMessage(
                     "$lastId",
-                    from,
-                    chat,
-                    isIncoming,
-                    date,
+                    from = from,
+                    chat = chat,
+                    isIncoming = isIncoming,
+                    date = date,
                     text = payload as String
                 )
-                else -> if ("image" == payload || "text" == payload) makeMessage(
-                    from,
-                    chat,
-                    date,
-                    payload,
-                    type,
-                    isIncoming
-                ) else throw IllegalArgumentException()
             }
         }
     }
